@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bistro/static/css/main.92a6bc70.css",
+    "main.js": "/bistro/static/js/main.51d12054.js",
+    "static/js/787.db9b214f.chunk.js": "/bistro/static/js/787.db9b214f.chunk.js",
+    "index.html": "/bistro/index.html",
+    "main.92a6bc70.css.map": "/bistro/static/css/main.92a6bc70.css.map",
+    "main.51d12054.js.map": "/bistro/static/js/main.51d12054.js.map",
+    "787.db9b214f.chunk.js.map": "/bistro/static/js/787.db9b214f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92a6bc70.css",
+    "static/js/main.51d12054.js"
+  ]
+}
