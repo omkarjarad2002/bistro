@@ -17,20 +17,18 @@ function Orderdashboard() {
     (state) => state.cart
   );
   const Razorpay = useRazorpay();
- 
 
   const [userAddress, setAddress] = useState("");
 
-  const OrderAddressApi=async()=>{
-    
+  const OrderAddressApi = async () => {
     const newOrder = {
-      UserAddress:userAddress,
-      UserID:User.User._id,
+      UserAddress: userAddress,
+      UserID: User.User._id,
       totalPrice,
-      restaurantID:RestaurantUser.RestaurantUser,
-    } 
+      restaurantID: RestaurantUser.RestaurantUser,
+    };
 
-    const response = await fetch("http://localhost:4457/cart", {
+    const response = await fetch("https://bistro-backend.onrender.com/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,19 +37,18 @@ function Orderdashboard() {
     });
 
     const data = await response.json();
+  };
 
-  }
- 
-
-  const handlePayment = useCallback(async () => {  
-
-    
-    const order = await fetch("http://localhost:4457/razorPayment", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+  const handlePayment = useCallback(async () => {
+    const order = await fetch(
+      "https://bistro-backend.onrender.com/razorPayment",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
     const res = await order.json();
 
     const options = {
@@ -63,9 +60,9 @@ function Orderdashboard() {
       image: "https://example.com/your_logo",
       order_id: res.id.order_IrVrqVFbNirkZp,
       handler: (res) => {
-        if(!res){
+        if (!res) {
           return;
-        }else{
+        } else {
           OrderAddressApi();
         }
       },
@@ -184,13 +181,12 @@ function Orderdashboard() {
                 name="UserAddress"
                 placeholder="Please leave address here..."
                 value={userAddress}
-                onChange={(e)=>(setAddress(e.target.value))}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
           </form>
         </div>
       </div>
-
 
       <div>
         <button

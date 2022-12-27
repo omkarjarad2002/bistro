@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Footer() {
-    
   const [value, setValue] = useState("India");
   const [Language, setLanguage] = useState("English");
 
@@ -15,13 +14,14 @@ function Footer() {
     event.preventDefault();
   };
 
-  return <div>
-       <footer className="bg-dark border-box">
+  return (
+    <div>
+      <footer className="bg-dark border-box">
         <div className="container">
           <div className="FirstAboutBox d-flex">
             <div className="CountrySelectionForm pt-4 FillingInfo button">
               <form className="Form" onSubmit={handleSubmit}>
-                <select value={value} onChange={handleChange}>
+                <select className="Form" value={value} onChange={handleChange}>
                   <option value="India">India</option>
                   <option value="Canada">Canada</option>
                   <option value="USA">USA</option>
@@ -99,7 +99,8 @@ function Footer() {
           </ul>
         </div>
       </footer>
-  </div>;
+    </div>
+  );
 }
 
 export default Footer;

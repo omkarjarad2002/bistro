@@ -1,14 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom"; 
-import Spinner from './Spinner';
-
+import { useNavigate, useParams, Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function Restaurantdashboard() {
   const [userData, setUserData] = useState();
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(false);
-
 
   const navigate = useNavigate();
 
@@ -42,7 +40,10 @@ function Restaurantdashboard() {
   const uploadImage = async () => {
     const formdata = new FormData();
     formdata.append("file", file);
-    const res = await axios.post("http://localhost:4457/uploadfile", formdata);
+    const res = await axios.post(
+      "https://bistro-backend.onrender.com/uploadfile",
+      formdata
+    );
     return res;
   };
 
@@ -52,21 +53,24 @@ function Restaurantdashboard() {
 
     const { name, price, quentity, type } = product;
 
-    const res = await fetch("http://localhost:4457/addnewproduct", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
+    const res = await fetch(
+      "https://bistro-backend.onrender.com/addnewproduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
 
-      body: JSON.stringify({
-        name,
-        price,
-        quentity,
-        type,
-        file: file.data.file.filename,
-        restaurantID: userData?._id,
-      }),
-    });
+        body: JSON.stringify({
+          name,
+          price,
+          quentity,
+          type,
+          file: file.data.file.filename,
+          restaurantID: userData?._id,
+        }),
+      }
+    );
 
     const data = await res.json();
 
@@ -79,10 +83,10 @@ function Restaurantdashboard() {
   };
 
   const callAboutPage = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:4457/get/info/restaurant/${id}`,
+        `https://bistro-backend.onrender.com/get/info/restaurant/${id}`,
         {
           method: "GET",
           headers: {
@@ -94,14 +98,14 @@ function Restaurantdashboard() {
 
       const data = await res.json();
       setUserData(data);
-      setLoading(false)
+      setLoading(false);
 
       if (!res.status === 200) {
-        setLoading(false)
+        setLoading(false);
         throw new Error(res.error);
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       alert("ERROR");
     }
   };
@@ -110,8 +114,8 @@ function Restaurantdashboard() {
     callAboutPage();
   }, []);
 
-  if(loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
@@ -182,7 +186,7 @@ function Restaurantdashboard() {
           </label>
           <div className="col-sm-3 pt-4">
             <input
-              type="text" 
+              type="text"
               name="type"
               onChange={handleInputs}
               className="form-control"

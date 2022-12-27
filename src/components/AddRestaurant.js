@@ -40,7 +40,10 @@ function AddRestuarant() {
   const uploadImage = async () => {
     const formdata = new FormData();
     formdata.append("file", file);
-    const res = await axios.post("http://localhost:4457/uploadfile", formdata);
+    const res = await axios.post(
+      "https://bistro-backend.onrender.com/uploadfile",
+      formdata
+    );
     return res;
   };
 
@@ -51,20 +54,23 @@ function AddRestuarant() {
 
     const { name, email, phone, items, address } = user;
 
-    const res = await fetch("http://localhost:4457/addrestaurant", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        items,
-        address,
-        file: file.data.file.filename,
-      }),
-    });
+    const res = await fetch(
+      "https://bistro-backend.onrender.com/addrestaurant",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          items,
+          address,
+          file: file.data.file.filename,
+        }),
+      }
+    );
 
     const data = await res.json();
     console.log(res);
@@ -187,7 +193,10 @@ function AddRestuarant() {
                     style={{ border: "1px solid grey" }}
                     required
                   />
-                  <label className="form-check-label" htmlhtmlFor="invalidCheck2">
+                  <label
+                    className="form-check-label"
+                    htmlhtmlFor="invalidCheck2"
+                  >
                     Agree to terms and conditions
                   </label>
                 </div>
@@ -211,6 +220,5 @@ function AddRestuarant() {
     </div>
   );
 }
- 
 
 export default AddRestuarant;

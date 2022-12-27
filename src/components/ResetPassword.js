@@ -28,7 +28,7 @@ function ResetPassword() {
   const PostData = async (e) => {
     e.preventDefault();
 
-    const { otp, otpcode, email, password, cpassword } = user; 
+    const { otp, otpcode, email, password, cpassword } = user;
 
     if (!otp || !otpcode || !email || !password || !cpassword) {
       alert("Invalid Credentials !");
@@ -36,7 +36,7 @@ function ResetPassword() {
     }
 
     const res = await axios.post(
-      "http://localhost:4457/changePassword",
+      "https://bistro-backend.onrender.com/changePassword",
       {
         otp,
         otpcode,

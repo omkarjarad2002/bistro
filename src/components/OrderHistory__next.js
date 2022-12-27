@@ -9,38 +9,38 @@ function OrderHistory__next() {
     setValue(event.target.value);
   };
 
-  
   const [getreason, setReason] = useState({
-    reason:""
-  })
+    reason: "",
+  });
 
-  let name,value;
+  let name, value;
 
-  const handleInputs = (e)=>{ 
+  const handleInputs = (e) => {
     name = e.target.name;
-    value = e.target.value
+    value = e.target.value;
 
-    setReason({...getreason, [name]:value})
-  }
+    setReason({ ...getreason, [name]: value });
+  };
 
   const UpdateOrderStatus = async () => {
-
-    const { reason } = getreason; 
-    if(!reason){
-        alert("NO NOTE")
+    const { reason } = getreason;
+    if (!reason) {
+      alert("NO NOTE");
     }
 
-
-    const response = await fetch(`http://localhost:4457/updateStatus/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        updateStatus: getvalue,
-        reason
-      }),
-    });
+    const response = await fetch(
+      `https://bistro-backend.onrender.com/updateStatus/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          updateStatus: getvalue,
+          reason,
+        }),
+      }
+    );
 
     const data = await response.json();
     if (response.status == 200) {
@@ -79,26 +79,26 @@ function OrderHistory__next() {
             </form>
           </div>
           <div className="mb-3 pt-2 ps-5 d-flex text-align-center align-items-center">
-            <label htmlFor="validationDefault01"> 
-            <h5>Note </h5>
+            <label htmlFor="validationDefault01">
+              <h5>Note </h5>
             </label>
             <textarea
-            style={{maxHeight:"400px", height:"100%", minHeight:"100px"}}
+              style={{ maxHeight: "400px", height: "100%", minHeight: "100px" }}
               type="text"
               className="form-control ms-2"
               autoComplete="off"
               id="validationDefault01"
               name="reason"
               placeholder="If order cancelled.Then why cancelled?"
-                value={getreason.reason}
-                onChange={handleInputs}
+              value={getreason.reason}
+              onChange={handleInputs}
               required
             />
-          </div> 
+          </div>
         </div>
-          <button className="btn btn-success " onClick={UpdateOrderStatus}>
-            Update
-          </button>
+        <button className="btn btn-success " onClick={UpdateOrderStatus}>
+          Update
+        </button>
       </div>
     </div>
   );

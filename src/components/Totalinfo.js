@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../state/actionCreator";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addProduct } from "../features/Cartslice";
 import { addRestaurantUser } from "../features/RestaurantUserSlice";
-import Spinner from './Spinner';
+import Spinner from "./Spinner";
 
 function Totalinfo() {
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ function Totalinfo() {
   const addProductToCart = (product) => {
     dispatch(addProduct({ product, quantity: 1 }));
   };
- 
+
   const [userData, setUserData] = useState();
 
   const { id } = useParams();
@@ -38,48 +38,54 @@ function Totalinfo() {
   const navigate = useNavigate();
 
   const callAboutPage = async () => {
-    setLoading(true)
+    setLoading(true);
     let i = 0;
     try {
-      const res = await fetch(`http://localhost:4457/get/restaurant/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://bistro-backend.onrender.com/get/restaurant/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       setUserData(data);
-      setLoading(false)
+      setLoading(false);
 
       if (!res.status === 200) {
-        setLoading(false)
+        setLoading(false);
         throw new Error(res.error);
       }
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   const [products, setProduct] = useState();
 
   const getAllProducts = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await fetch(`http://localhost:4457/get/allproducts/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://bistro-backend.onrender.com/get/allproducts/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       const productdata = await res.json();
       setProduct(productdata);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
     }
   };
@@ -89,8 +95,8 @@ function Totalinfo() {
     getAllProducts();
   }, []);
 
-  if(loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
@@ -173,7 +179,7 @@ function Totalinfo() {
           <div className="card product__card">
             <div className=" imageContainer">
               <img
-                src={`http://localhost:4457/uploads/${product.file}`}
+                src={`https://bistro-backend.onrender.com/uploads/${product.file}`}
                 className="card-img-top"
                 alt="..."
               />

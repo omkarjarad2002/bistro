@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
-import Spinner from "./Spinner"; 
+import { Link, useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function About() {
   const [aboutData, setData] = useState();
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const callAboutPage = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4457/get/about", {
+      const res = await fetch("https://bistro-backend.onrender.com/get/about", {
         method: "GET",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
@@ -27,7 +27,6 @@ function About() {
         setLoading(false);
         throw new Error(res.error);
       }
-      
     } catch (error) {
       navigate("/register");
     }
@@ -37,24 +36,23 @@ function About() {
     callAboutPage();
   }, []);
 
-   if(loading){
-     return <Spinner/>
-   }
- 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <>
-      <div className="container emp-profile pt-5"> 
+      <div className="container emp-profile pt-5">
         <form method="GET">
           <div className="row ">
             <div className="col-md-4">
               <div className="profile-img">
-          
-                <h1 style={{fontFamily:"cursive"}}>BISTRO</h1>
+                <h1 style={{ fontFamily: "cursive" }}>BISTRO</h1>
               </div>{" "}
             </div>
             <div className="col-md-6 ps-2">
               <div className="profile-head">
-                <h5>{(aboutData?.name)?aboutData?.name:<Spinner/>}</h5> 
+                <h5>{aboutData?.name ? aboutData?.name : <Spinner />}</h5>
 
                 <ul className="nav nav-tabs" role="tablist">
                   <li className="nav-item">
@@ -67,15 +65,13 @@ function About() {
                     >
                       About
                     </a>
-                  </li> 
+                  </li>
                 </ul>
               </div>
             </div>
             <div className="col-md-2">
-            <button className="btn btn-secondary btn-sm">
-                <Link to={`/editProfile/${aboutData?._id}`}>
-                  Edit Profile
-                </Link>
+              <button className="btn btn-secondary btn-sm">
+                <Link to={`/editProfile/${aboutData?._id}`}>Edit Profile</Link>
               </button>
             </div>
           </div>
@@ -83,7 +79,11 @@ function About() {
             <div className="col-md-4">
               <div className="profile-work">
                 <div>
-                  <button className="btn btn-primary"><Link to={`/UserOrderHistory/${aboutData?._id}`}>Check Order History</Link></button>
+                  <button className="btn btn-primary">
+                    <Link to={`/UserOrderHistory/${aboutData?._id}`}>
+                      Check Order History
+                    </Link>
+                  </button>
                 </div>
                 <br></br>
               </div>
@@ -144,6 +144,6 @@ function About() {
       </div>
     </>
   );
-} 
+}
 
 export default About;

@@ -1,33 +1,26 @@
-import React, { useEffect, useState , useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { Link ,useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {UserContext} from "../App"
-import {addUser} from "../features/Userslice" 
+import { UserContext } from "../App";
+import { addUser } from "../features/Userslice";
 
 function Navbar() {
-  
-
-  const  User  = useSelector(
-    (state) => state.user
-  );
-  
+  const User = useSelector((state) => state.user);
 
   const userDispatch = useDispatch();
 
-  const {state, dispatch} = useContext(UserContext); 
-  
+  const { state, dispatch } = useContext(UserContext);
 
-  const navigate = useNavigate(); 
- 
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const {id} = useParams();
- 
- 
+  const { id } = useParams();
+
   const loginUser = async (e) => {
     try {
       e.preventDefault();
@@ -37,7 +30,7 @@ function Navbar() {
       }
 
       const res = await axios.post(
-        "http://localhost:4457/signin",
+        "https://bistro-backend.onrender.com/signin",
         {
           email,
           password,
@@ -48,30 +41,28 @@ function Navbar() {
         }
       );
       if (res.status === 200) {
-        dispatch({type:"USER", payload:true}) 
- 
-        userDispatch(addUser(res.data.userLogin))
+        dispatch({ type: "USER", payload: true });
 
+        userDispatch(addUser(res.data.userLogin));
 
         alert("Login successfully !!");
         navigate("/about");
-      } 
-      if(res.status === 201){
-        dispatch({type:"USER", payload:true})
-        navigate("/admindashboard")
       }
-      if(res.status === 202){   
-        dispatch({type:"USER", payload:true})
-         
-        navigate(`/restaurantdashboard/${res.data.reststaurantUser._id}`) 
-      } 
-       
+      if (res.status === 201) {
+        dispatch({ type: "USER", payload: true });
+        navigate("/admindashboard");
+      }
+      if (res.status === 202) {
+        dispatch({ type: "USER", payload: true });
+
+        navigate(`/restaurantdashboard/${res.data.reststaurantUser._id}`);
+      }
     } catch (error) {
       alert("Invalid credentials 2 !!");
     }
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     const smallscreennav = document.querySelector(".smallscreennav");
     const nav = document.querySelector(".nav-links");
 
@@ -84,13 +75,12 @@ function Navbar() {
   }, []);
 
   //omkarjarad28@gmail.com
-  //dispatch({type:"USER", payload:true}) 
+  //dispatch({type:"USER", payload:true})
 
-
-  const RenderMenu =()=>{
-    if(state){
+  const RenderMenu = () => {
+    if (state) {
       return (
-        <> 
+        <>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -109,22 +99,24 @@ function Navbar() {
           </li>
           <li>
             <Link to="/contact">Contact Us</Link>
-          </li> 
+          </li>
           <li>
             <Link to="/Logout">Logout</Link>
           </li>
           <li>
-          <div className="d-flex align-items-center justify-content-center" >
-              <i className="zmdi zmdi-shopping-cart" style={{color:"black"}} ></i>
-              <button type="button" className="btn  " >
+            <div className="d-flex align-items-center justify-content-center">
+              <i
+                className="zmdi zmdi-shopping-cart"
+                style={{ color: "black" }}
+              ></i>
+              <button type="button" className="btn  ">
                 <Link to="/cart">Cart</Link>
               </button>
             </div>
-          </li> 
+          </li>
         </>
-      ) 
-      
-    }else{ 
+      );
+    } else {
       return (
         <>
           <li>
@@ -153,27 +145,29 @@ function Navbar() {
             <button
               type="button"
               className="btn loginbtn"
-              style={{ border: "1px solid black"  }}
+              style={{ border: "1px solid black" }}
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
               data-bs-whatever="@mdo"
             >
-              <Link to=""  >Login</Link>
+              <Link to="">Login</Link>
             </button>
-          </li> 
+          </li>
           <li>
-            <div className="d-flex align-items-center justify-content-center" >
-              <i className="zmdi zmdi-shopping-cart" style={{color:"black"}} ></i>
-              <button type="button" className="btn  " >
+            <div className="d-flex align-items-center justify-content-center">
+              <i
+                className="zmdi zmdi-shopping-cart"
+                style={{ color: "black" }}
+              ></i>
+              <button type="button" className="btn  ">
                 <Link to="/cart">Cart</Link>
               </button>
             </div>
-          </li> 
+          </li>
         </>
-      )
-
+      );
     }
-  }
+  };
 
   return (
     <div>
@@ -183,7 +177,9 @@ function Navbar() {
         <label for="check" className="checkbtn">
           <button className="btn btn-primary" id="checkbutton"></button>
         </label> */}
-        <label className="logo fs-1"  style={{fontFamily:"cursive"}}>Bistro</label>
+        <label className="logo fs-1" style={{ fontFamily: "cursive" }}>
+          Bistro
+        </label>
         <div className="smallscreennav">
           <div className="line1"></div>
           <div className="line2"></div>
@@ -191,12 +187,11 @@ function Navbar() {
           <div className="line4"></div>
           <div className="line5"></div>
         </div>
-        
-        <ul className="nav-links">
 
-        <RenderMenu/>
-        </ul> 
-        </nav>
+        <ul className="nav-links">
+          <RenderMenu />
+        </ul>
+      </nav>
       <div>
         <div
           className="modal fade"
@@ -249,23 +244,27 @@ function Navbar() {
                     ></input>
                   </div>
                   <div className="mb-3">
-                    <p><Link style={{color:"red"}} to={"/sendotp"}>forgotten password ?</Link></p>
+                    <p>
+                      <Link style={{ color: "red" }} to={"/sendotp"}>
+                        forgotten password ?
+                      </Link>
+                    </p>
                   </div>
                 </form>
               </div>
-              <div className="modal-footer"> 
+              <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-primary"
                   id="button"
-                  type="submit"
+                  Type="submit"
                   value="Submit"
                   role="button"
-                  style={{width:"100%"}}
+                  style={{ width: "100%" }}
                   onClick={loginUser}
                 >
                   Login
-                </button> 
+                </button>
               </div>
             </div>
           </div>

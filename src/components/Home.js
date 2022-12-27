@@ -17,9 +17,9 @@ function Home() {
   };
 
   return (
-    <div className="card text-white home__div "> 
-      <div className="card-img-overlay button__div d-grid gap-2 col-12   float-end">
-        <div className="card-img-overlay button__div d-grid  ">
+    <div className="card text-white home__div ">
+      <div className=" button__div  gap-2 col-12   float-end">
+        <div className="card-img-overlay button__div   ">
           <div className=" ">
             <button className="btn btn-danger btn-sm">
               <li>

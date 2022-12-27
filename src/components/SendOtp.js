@@ -3,11 +3,11 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import {checkUser} from "../features/Checkingslice" 
+import { checkUser } from "../features/Checkingslice";
 
 function SendOtp() {
   let navigate = useNavigate();
-  
+
   const userDispatch = useDispatch();
 
   const [user, setUser] = useState({
@@ -34,7 +34,7 @@ function SendOtp() {
     }
 
     const res = await axios.post(
-      "http://localhost:4457/emailSend",
+      "https://bistro-backend.onrender.com/emailSend",
       {
         email,
       },
@@ -43,24 +43,20 @@ function SendOtp() {
         "Content-Type": "application/json",
       }
     );
-    if (res.status === 200) { 
-      userDispatch(checkUser(res.data))
-      alert("Otp sent successfully !! Please check Your Email !!"); 
+    if (res.status === 200) {
+      userDispatch(checkUser(res.data));
+      alert("Otp sent successfully !! Please check Your Email !!");
       navigate("/resetpassword");
     } else {
       alert("ERROR");
-    } 
+    }
   };
 
   return (
-    <div
-      className="container otp__container mt-5" 
-    >
+    <div className="container otp__container mt-5">
       <div className="container  pt-3 pb-3 pb-2">
         <div className="FirstAboutBox d-flex">
-          <div
-            className="mb-3 otp__container__div  ps-2 d-flex " 
-          >
+          <div className="mb-3 otp__container__div  ps-2 d-flex ">
             <label htmlFor="validationDefault01" className="ps-2 mt-2">
               <h5>Email </h5>
             </label>

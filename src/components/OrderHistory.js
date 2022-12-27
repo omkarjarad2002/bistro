@@ -22,36 +22,41 @@ function OrderHistory() {
   const getAllCratOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:4457/get/cartOrders/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://bistro-backend.onrender.com/get/cartOrders/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       setOrder(data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       alert("Orders Data Not Found !");
     }
   };
-
-   
 
   useEffect(() => {
     getAllCratOrders();
   }, []);
 
-  if(loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
     <div className="fooditems__container text-align-center pt-5 pb-5 container ">
-    <h3><Link style={{color:"black", cursor:"initial"}} to="">Order History</Link></h3>
+      <h3>
+        <Link style={{ color: "black", cursor: "initial" }} to="">
+          Order History
+        </Link>
+      </h3>
 
       {orders?.map((order) => (
         <div className="card   d-flex mt-4 d-inline-flex ms-4 getabout2">
@@ -65,12 +70,10 @@ function OrderHistory() {
             <p className="card-title">Order Address : {order.UserAddress}</p>
             <p className="card-title">Order Date : {order.date}</p>
           </div>
-         
+
           <button className="btn btn-primary btn-sm">
-                <Link to={`/orderHistory__next/${order?._id}`}>
-                  Update Status
-                </Link>
-              </button>
+            <Link to={`/orderHistory__next/${order?._id}`}>Update Status</Link>
+          </button>
         </div>
       ))}
     </div>

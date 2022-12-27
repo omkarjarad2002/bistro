@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate, Link, Navigate } from "react-router-dom";
@@ -6,12 +6,12 @@ import axios from "axios";
 import { incrementQuantity } from "../features/Cartslice";
 import { decrementQuantity } from "../features/Cartslice";
 import { clearCart } from "../features/Cartslice";
-import {UserContext} from "../App"
+import { UserContext } from "../App";
 
 function Cart() {
   const amount = useSelector((state) => state.amount);
-  const {state} = useContext(UserContext);
- 
+  const { state } = useContext(UserContext);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,27 +20,27 @@ function Cart() {
   );
   const { id } = useParams();
 
-  const incrementProductQuantity = (product) => {  
-    dispatch(incrementQuantity(product._id));  
+  const incrementProductQuantity = (product) => {
+    dispatch(incrementQuantity(product._id));
   };
 
   const decrementProductQuantity = (product) => {
-    dispatch(decrementQuantity(product._id)); 
+    dispatch(decrementQuantity(product._id));
   };
 
   const clearcart = () => {
     dispatch(clearCart());
   };
 
-  const checkUser =(e)=>{
-    if(state){
-      navigate("/orderdashboard")
-    }else{
-      navigate("/register")
+  const checkUser = (e) => {
+    if (state) {
+      navigate("/orderdashboard");
+    } else {
+      navigate("/register");
       alert("Please Register/Login First !");
     }
-  }
-  
+  };
+
   return (
     <div className="container pt-3 ">
       <h2>Shopping Cart</h2>
@@ -63,7 +63,7 @@ function Cart() {
               <div className="row g-0  ">
                 <div className="col-md-5">
                   <img
-                    src={`http://localhost:4457/uploads/${product?.file}`}
+                    src={`https://bistro-backend.onrender.com/uploads/${product?.file}`}
                     className="img-fluid rounded-start"
                     alt="..."
                     name="file"
@@ -85,7 +85,7 @@ function Cart() {
                         className="col-sm-6 col-form-label"
                       >
                         Quantity :
-                      </h4> 
+                      </h4>
                       <h4 className="pt-1">{quantity}</h4>
                     </div>
                     <button
@@ -108,10 +108,9 @@ function Cart() {
                       className="btn btn-primary mt-3 ms-2"
                       onClick={checkUser}
                     >
-                      Checkout  
+                      Checkout
                     </button>
                   </div>
-                  
                 </div>
                 <div className="col-md-1">
                   <div className="card-body">
@@ -121,8 +120,6 @@ function Cart() {
               </div>
             </div>
           </div>
-
- 
         </div>
       ))}
       <br />

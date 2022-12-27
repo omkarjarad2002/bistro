@@ -1,137 +1,149 @@
-import React,{ useState } from 'react';
-import { useNavigate } from 'react-router';
-import { Link } from "react-router-dom";  
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function Signup() {
-  
   let navigate = useNavigate();
-  
+
   const [user, setUser] = useState({
-    name:"",email:"",phone:"",password:"",cpassword:""
-  })
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    cpassword: "",
+  });
 
-  let name,value;
+  let name, value;
 
-  const handleInputs = (e)=>{ 
+  const handleInputs = (e) => {
     name = e.target.name;
-    value = e.target.value
+    value = e.target.value;
 
-    setUser({...user, [name]:value})
-  }
+    setUser({ ...user, [name]: value });
+  };
 
-  const PostData = async (e)=>{
+  const PostData = async (e) => {
     e.preventDefault();
 
-    const {name ,email ,phone ,password ,cpassword} = user; 
-     
-    if(!name || !email || !phone ||!password ||!cpassword){
-      alert("Please enter all fields in the form !!")
-      return
+    const { name, email, phone, password, cpassword } = user;
+
+    if (!name || !email || !phone || !password || !cpassword) {
+      alert("Please enter all fields in the form !!");
+      return;
     }
-    const res = await fetch("http://localhost:4457/register", {
-      method:"POST",
-      headers:{
-        "Content-Type" : "application/json"
+    const res = await fetch("https://bistro-backend.onrender.com/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,email,phone,password,cpassword
-      })
-    })
+        name,
+        email,
+        phone,
+        password,
+        cpassword,
+      }),
+    });
 
     const data = await res.json();
 
-    if(data.status === 422){
-      window.alert("Invalid Credentials !!"); 
-    }else{
-      window.alert("registration successfull"); 
+    if (data.status === 422) {
+      window.alert("Invalid Credentials !!");
+    } else {
+      window.alert("registration successfull");
 
-      navigate("/register")
+      navigate("/register");
     }
+  };
 
-  } 
-
-  return <div>
-    
-       <section
-        className="section__height d-flex"
-        id="contact"
-      >
+  return (
+    <div>
+      <section className="section__height d-flex" id="contact">
         <div className="container1 container">
-          <h2 className='pt-3 pb-3'>Register :)</h2>
+          <h2 className="pt-3 pb-3">Register :)</h2>
           <div className="contact__container">
-            <form className="" method="POST" >
-              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">   
-              <label htmlFor="validationDefault01"><i className="zmdi zmdi-account"></i></label>
+            <form className="" method="POST">
+              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">
+                <label htmlFor="validationDefault01">
+                  <i className="zmdi zmdi-account"></i>
+                </label>
                 <input
                   type="text"
                   className="form-control"
-                  autoComplete='off'
+                  autoComplete="off"
                   id="validationDefault01"
                   name="name"
                   placeholder="Enter Your Name"
                   value={user.name}
                   onChange={handleInputs}
                   required
-                /> 
+                />
               </div>
-                <hr/>
-              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">  
-              <label htmlFor="name"><i className="zmdi zmdi-email"></i></label>
+              <hr />
+              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">
+                <label htmlFor="name">
+                  <i className="zmdi zmdi-email"></i>
+                </label>
                 <input
                   type="email"
                   className="form-control"
                   id="email"
                   name="email"
                   placeholder="Enter your Email"
-                  autoComplete='off'
+                  autoComplete="off"
                   value={user.email}
                   onChange={handleInputs}
-                /> 
+                />
               </div>
-                <hr/>
-              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">  
-              <label htmlFor="name"><i className="zmdi zmdi-phone"></i></label>
+              <hr />
+              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">
+                <label htmlFor="name">
+                  <i className="zmdi zmdi-phone"></i>
+                </label>
                 <input
                   type="number"
                   className="form-control"
-                  autoComplete='off'
+                  autoComplete="off"
                   id="phone"
                   name="phone"
                   placeholder="Enter your Number"
                   value={user.phone}
                   onChange={handleInputs}
-                /> 
+                />
               </div>
-                <hr/> 
-              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">  
-              <label htmlFor="name"><i className="zmdi zmdi-lock"></i></label>
+              <hr />
+              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">
+                <label htmlFor="name">
+                  <i className="zmdi zmdi-lock"></i>
+                </label>
                 <input
                   type="password"
                   className="form-control"
-                  autoComplete='off'
+                  autoComplete="off"
                   id="password"
                   name="password"
                   placeholder="Enter password"
                   value={user.password}
                   onChange={handleInputs}
-                /> 
+                />
               </div>
-                <hr/>
-              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">  
-              <label htmlFor="name"><i className="zmdi zmdi-lock"></i></label>
+              <hr />
+              <div className="mb-3 pt-2 d-flex text-align-center align-items-center">
+                <label htmlFor="name">
+                  <i className="zmdi zmdi-lock"></i>
+                </label>
                 <input
                   type="password"
                   className="form-control"
-                  autoComplete='off'
+                  autoComplete="off"
                   id="cpassword"
                   name="cpassword"
                   placeholder="Confirm password"
                   value={user.cpassword}
                   onChange={handleInputs}
-                /> 
-              </div> 
-                <hr/>
+                />
+              </div>
+              <hr />
               <div className="d-grid pb-3  d-md-block">
                 <button
                   className="btn btn-outline-success  p-2   rounded"
@@ -142,25 +154,17 @@ function Signup() {
                   onClick={PostData}
                 >
                   Register
-                </button>  
-                or
-                <button
-                  type="button"  
-                  className="btn btn-primary"  
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  data-bs-whatever="@mdo"
-                >
-              <Link to="">Login</Link>
-            </button> 
+                </button>
+                <p>
+                  Already have an account <Link to="">Login</Link>
+                </p>
               </div>
             </form>
           </div>
         </div>
       </section>
-
- 
-  </div>;
+    </div>
+  );
 }
 
-export default Signup; 
+export default Signup;
