@@ -12,7 +12,7 @@ function UserOrederDetails() {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://bistro-backend.onrender.com/get/userOrederDetails/${id}`,
+        `http://localhost:4457/get/userOrederDetails/${id}`,
         {
           method: "GET",
           headers: {

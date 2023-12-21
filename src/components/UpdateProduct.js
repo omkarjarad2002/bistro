@@ -38,10 +38,7 @@ function UpdateProduct() {
   const uploadImage = async () => {
     const formdata = new FormData();
     formdata.append("file", file);
-    const res = await axios.post(
-      "https://bistro-backend.onrender.com/uploadfile",
-      formdata
-    );
+    const res = await axios.post("http://localhost:4457/uploadfile", formdata);
     return res;
   };
 
@@ -50,22 +47,19 @@ function UpdateProduct() {
 
     const { name, price, quentity } = product;
 
-    const res = await fetch(
-      `https://bistro-backend.onrender.com/updateproduct/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
+    const res = await fetch(`http://localhost:4457/updateproduct/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
 
-        body: JSON.stringify({
-          name,
-          price,
-          quentity,
-          file: file.data.file.filename,
-        }),
-      }
-    );
+      body: JSON.stringify({
+        name,
+        price,
+        quentity,
+        file: file.data.file.filename,
+      }),
+    });
 
     const data = await res.json();
 
@@ -79,16 +73,13 @@ function UpdateProduct() {
 
   const DeleteProduct = async () => {
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/updateproduct/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/updateproduct/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
     } catch (error) {
@@ -99,16 +90,13 @@ function UpdateProduct() {
   const callproductdata = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/updateproduct/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/updateproduct/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
       setProductData(data);

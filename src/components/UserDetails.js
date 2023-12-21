@@ -6,16 +6,13 @@ function UserDetails() {
 
   const getOrderDetails = async () => {
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/get/UserDetails`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/get/UserDetails`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
       setOrderDetails(data);

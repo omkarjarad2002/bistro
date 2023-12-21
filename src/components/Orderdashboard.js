@@ -28,7 +28,7 @@ function Orderdashboard() {
       restaurantID: RestaurantUser.RestaurantUser,
     };
 
-    const response = await fetch("https://bistro-backend.onrender.com/cart", {
+    const response = await fetch("http://localhost:4457/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,15 +40,12 @@ function Orderdashboard() {
   };
 
   const handlePayment = useCallback(async () => {
-    const order = await fetch(
-      "https://bistro-backend.onrender.com/razorPayment",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
+    const order = await fetch("http://localhost:4457/razorPayment", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
     const res = await order.json();
 
     const options = {

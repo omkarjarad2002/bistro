@@ -36,7 +36,7 @@ function ResetPassword() {
     }
 
     const res = await axios.post(
-      "https://bistro-backend.onrender.com/changePassword",
+      "http://localhost:4457/changePassword",
       {
         otp,
         otpcode,

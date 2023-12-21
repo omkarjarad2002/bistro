@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
 
@@ -11,7 +11,8 @@ function About() {
   const callAboutPage = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://bistro-backend.onrender.com/get/about", {
+      const res = await fetch("http://localhost:4457/get/about", {
+        // const res = await fetch("https://bistrobackend.onrender.com/get/about",
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -28,19 +28,16 @@ function OrderHistory__next() {
       alert("NO NOTE");
     }
 
-    const response = await fetch(
-      `https://bistro-backend.onrender.com/updateStatus/${id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          updateStatus: getvalue,
-          reason,
-        }),
-      }
-    );
+    const response = await fetch(`http://localhost:4457/updateStatus/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        updateStatus: getvalue,
+        reason,
+      }),
+    });
 
     const data = await response.json();
     if (response.status == 200) {

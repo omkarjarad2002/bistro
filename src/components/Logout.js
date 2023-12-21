@@ -9,7 +9,7 @@ function Logout() {
 
   const callLogoutPage = async () => {
     try {
-      const res = await fetch("https://bistro-backend.onrender.com/logout", {
+      const res = await fetch("http://localhost:4457/logout", {
         method: "GET",
         headers: {
           "Content-type": "application/json",

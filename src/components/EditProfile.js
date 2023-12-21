@@ -28,22 +28,19 @@ function EditProfile() {
 
     const { name, email, phone, password, cpassword } = user;
 
-    const res = await fetch(
-      `https://bistro-backend.onrender.com/updateuserdetails/${id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          password,
-          cpassword,
-        }),
-      }
-    );
+    const res = await fetch(`http://localhost:4457/updateuserdetails/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        password,
+        cpassword,
+      }),
+    });
 
     const data = await res.json();
     if (data) {

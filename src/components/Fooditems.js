@@ -13,16 +13,13 @@ function Fooditems() {
   const getAllRestaurants = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        "https://bistro-backend.onrender.com/get/allrestaurants",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch("http://localhost:4457/get/allrestaurants", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
 
@@ -50,7 +47,7 @@ function Fooditems() {
         <Link to={`/totalinfo/${restaurant._id}`}>
           <div className="card fooditems__card d-flex mt-4 d-inline-flex ms-4 getabout2">
             <img
-              src={`https://bistro-backend.onrender.com/uploads/${restaurant.file}`}
+              src={`http://localhost:4457/uploads/${restaurant.file}`}
               style={{ maxHeight: "250px", height: "100%" }}
               className="card-img-top"
               alt="..."

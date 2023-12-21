@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../features/Userslice";
+import { UserContext } from "../App";
 
 function Signup() {
   let navigate = useNavigate();
+  const userDispatch = useDispatch();
+  const { state, dispatch } = useContext(UserContext);
 
   const [user, setUser] = useState({
     name: "",
@@ -31,7 +36,7 @@ function Signup() {
       alert("Please enter all fields in the form !!");
       return;
     }
-    const res = await fetch("https://bistro-backend.onrender.com/register", {
+    const res = await fetch("http://localhost:4457/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,8 +56,11 @@ function Signup() {
       window.alert("Invalid Credentials !!");
     } else {
       window.alert("registration successfull");
+      dispatch({ type: "USER", payload: true });
 
-      navigate("/register");
+      userDispatch(addUser(res.data.userLogin));
+
+      navigate("/");
     }
   };
 

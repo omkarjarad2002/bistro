@@ -22,16 +22,13 @@ function OrderHistory() {
   const getAllCratOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/get/cartOrders/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/get/cartOrders/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
       setOrder(data);

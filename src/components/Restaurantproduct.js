@@ -10,16 +10,13 @@ function Restaurantproduct() {
   const getAllProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/get/allproducts/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/get/allproducts/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const data = await res.json();
       setProduct(data);
@@ -48,7 +45,7 @@ function Restaurantproduct() {
         {products?.map((product) => (
           <div className="card products_card  d-grid mt-4 d-inline-flex ms-3 getabout2">
             <img
-              src={`https://bistro-backend.onrender.com/uploads/${product.file}`}
+              src={`http://localhost:4457/uploads/${product.file}`}
               style={{ maxHeight: "200px", height: "100%" }}
               className="card-img-top"
               alt="..."

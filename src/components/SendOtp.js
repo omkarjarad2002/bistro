@@ -34,7 +34,7 @@ function SendOtp() {
     }
 
     const res = await axios.post(
-      "https://bistro-backend.onrender.com/emailSend",
+      "http://localhost:4457/emailSend",
       {
         email,
       },

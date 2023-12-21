@@ -63,7 +63,7 @@ function Cart() {
               <div className="row g-0  ">
                 <div className="col-md-5">
                   <img
-                    src={`https://bistro-backend.onrender.com/uploads/${product?.file}`}
+                    src={`http://localhost:4457/uploads/${product?.file}`}
                     className="img-fluid rounded-start"
                     alt="..."
                     name="file"

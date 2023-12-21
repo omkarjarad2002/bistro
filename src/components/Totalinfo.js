@@ -42,7 +42,7 @@ function Totalinfo() {
     let i = 0;
     try {
       const res = await fetch(
-        `https://bistro-backend.onrender.com/get/restaurant/${id}`,
+        `https://bistrobackend.onrender.com/get/restaurant/${id}`,
         {
           method: "GET",
           headers: {
@@ -70,16 +70,13 @@ function Totalinfo() {
   const getAllProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        `https://bistro-backend.onrender.com/get/allproducts/${id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`http://localhost:4457/get/allproducts/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const productdata = await res.json();
       setProduct(productdata);
@@ -179,7 +176,7 @@ function Totalinfo() {
           <div className="card product__card">
             <div className=" imageContainer">
               <img
-                src={`https://bistro-backend.onrender.com/uploads/${product.file}`}
+                src={`https://bistrobackend.onrender.com/uploads/${product.file}`}
                 className="card-img-top"
                 alt="..."
               />

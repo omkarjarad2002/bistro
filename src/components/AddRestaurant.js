@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 function AddRestuarant() {
   const navigate = useNavigate();
@@ -41,7 +40,7 @@ function AddRestuarant() {
     const formdata = new FormData();
     formdata.append("file", file);
     const res = await axios.post(
-      "https://bistro-backend.onrender.com/uploadfile",
+      "https://bistrobackend.onrender.com/uploadfile",
       formdata
     );
     return res;
@@ -54,23 +53,20 @@ function AddRestuarant() {
 
     const { name, email, phone, items, address } = user;
 
-    const res = await fetch(
-      "https://bistro-backend.onrender.com/addrestaurant",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          items,
-          address,
-          file: file.data.file.filename,
-        }),
-      }
-    );
+    const res = await fetch("http://localhost:4457/addrestaurant", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        items,
+        address,
+        file: file.data.file.filename,
+      }),
+    });
 
     const data = await res.json();
     console.log(res);
