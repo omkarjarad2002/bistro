@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import swal from "sweetalert";
 
 function Contact() {
   const [user, setUser] = useState({
@@ -21,6 +23,10 @@ function Contact() {
     e.preventDefault();
 
     const { name, email, phone, address } = user;
+    if (phone.length != 10) {
+      alert("Please enter correct phone number!!");
+      return;
+    }
 
     const res = await fetch("http://localhost:4457/contact", {
       method: "POST",
@@ -36,6 +42,12 @@ function Contact() {
     });
 
     const data = await res.json();
+
+    if (res.status == 201) {
+      swal("Form submitted Successfuly!", "", "success");
+    } else {
+      swal("Please try again later!", "", "error");
+    }
   };
 
   return (

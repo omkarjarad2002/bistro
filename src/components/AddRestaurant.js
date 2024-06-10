@@ -40,7 +40,8 @@ function AddRestuarant() {
     const formdata = new FormData();
     formdata.append("file", file);
     const res = await axios.post(
-      "https://bistrobackend.onrender.com/uploadfile",
+      // "https://bistrobackend.onrender.com/uploadfile",
+      "http://localhost:4457/uploadfile",
       formdata
     );
     return res;

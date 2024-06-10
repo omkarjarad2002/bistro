@@ -102,7 +102,11 @@ function Home() {
           <div className="FirstAboutBox d-flex">
             <div className="CountrySelectionForm pt-4 FillingInfo button">
               <form className="Form" onSubmit={handleSubmit}>
-                <select value={value} onChange={handleChange}>
+                <select
+                  className="select"
+                  value={value}
+                  onChange={handleChange}
+                >
                   <option value="India">India</option>
                   <option value="Canada">Canada</option>
                   <option value="USA">USA</option>
@@ -114,7 +118,11 @@ function Home() {
             </div>
             <div className="LanguageSelectionForm pt-4 FillingInfo button">
               <form className="FormLanguase" onSubmit={handleSubmit}>
-                <select value={value} onChange={handleChange}>
+                <select
+                  className="select"
+                  value={value}
+                  onChange={handleChange}
+                >
                   <option value="English">English</option>
                   <option value="Portugues">Portugues</option>
                   <option value="Polish">Polish</option>

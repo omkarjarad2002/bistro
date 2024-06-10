@@ -23,7 +23,8 @@ function SendOtp() {
     setUser({ ...user, [name]: value });
   };
 
-  const PostData = async (e) => {
+  const SendOTP = async (e) => {
+    console.log(user.email);
     e.preventDefault();
 
     const { email } = user;
@@ -43,6 +44,7 @@ function SendOtp() {
         "Content-Type": "application/json",
       }
     );
+    console.log(res);
     if (res.status === 200) {
       userDispatch(checkUser(res.data));
       alert("Otp sent successfully !! Please check Your Email !!");
@@ -75,7 +77,7 @@ function SendOtp() {
         </div>
         <div className="d-flex pt-2 mt-2">
           <div className="ps-3">
-            <button className="btn btn-danger " onClick={PostData}>
+            <button className="btn btn-danger " onClick={SendOTP}>
               Send Otp
             </button>
           </div>

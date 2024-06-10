@@ -9,6 +9,7 @@ import { addUser } from "../features/Userslice";
 
 function Navbar() {
   const User = useSelector((state) => state.user);
+  console.log(User);
 
   const userDispatch = useDispatch();
 

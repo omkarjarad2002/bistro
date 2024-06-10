@@ -27,7 +27,7 @@ function UserDetails() {
 
   return (
     <div className="fooditems__container text-align-center pt-5 pb-5 container ">
-      <h5 style={{ color: "purple" }}>Order History !</h5>
+      {/* <h5 style={{ color: "purple" }}>Order History !</h5> */}
 
       {OrderDetails?.map((user) => (
         <div className="card d-flex mt-4 d-inline-flex ms-4 getabout2">

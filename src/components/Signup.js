@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../features/Userslice";
 import { UserContext } from "../App";
+import swal from "sweetalert";
 
 function Signup() {
   let navigate = useNavigate();
@@ -29,6 +30,7 @@ function Signup() {
 
   const PostData = async (e) => {
     e.preventDefault();
+    console.log(user);
 
     const { name, email, phone, password, cpassword } = user;
 
@@ -53,14 +55,14 @@ function Signup() {
     const data = await res.json();
 
     if (data.status === 422) {
-      window.alert("Invalid Credentials !!");
+      swal("User already exists!!", "", "error");
     } else {
-      window.alert("registration successfull");
+      swal("Registration Successful!", "", "success");
       dispatch({ type: "USER", payload: true });
 
       userDispatch(addUser(res.data.userLogin));
 
-      navigate("/");
+      navigate("/fooditems");
     }
   };
 

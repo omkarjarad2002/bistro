@@ -5,13 +5,13 @@ import About from "./components/About";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import AddRestuarant from "./components/AddRestaurant";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Fooditems from "./components/Fooditems";
 import Totalinfo from "./components/Totalinfo";
 import Logout from "./components/Logout";
 import Cart from "./components/Cart";
 // import TestModal from './components/TestModal';
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./state/reducers/UseReducer";
 import AdminDashboard from "./components/AdminDashboard";
 import Restaurantdashboard from "./components/Restaurantdashboard";
@@ -28,10 +28,35 @@ import OrderHistory__next from "./components/OrderHistory__next";
 import EditProfile from "./components/EditProfile";
 import SendOtp from "./components/SendOtp";
 import ResetPassword from "./components/ResetPassword";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "./features/Userslice";
 
 export const UserContext = createContext();
 function App() {
+  const userDispatch = useDispatch();
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const isUserExist = async () => {
+    try {
+      const res = axios.get("http://localhost:4457/refreshtoken", {
+        withCredentials: true,
+      });
+
+      dispatch({ type: "USER", payload: true });
+      userDispatch(addUser(res.data.user));
+
+      console.log(res.data.user);
+
+      Navigate("/");
+    } catch {
+      Navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    isUserExist();
+  }, []);
 
   return (
     <>

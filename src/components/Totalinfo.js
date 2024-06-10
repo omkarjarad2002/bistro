@@ -42,7 +42,8 @@ function Totalinfo() {
     let i = 0;
     try {
       const res = await fetch(
-        `https://bistrobackend.onrender.com/get/restaurant/${id}`,
+        `https://localhost:4457/get/restaurant/${id}`,
+        // `https://bistrobackend.onrender.com/get/restaurant/${id}`,
         {
           method: "GET",
           headers: {
@@ -176,7 +177,8 @@ function Totalinfo() {
           <div className="card product__card">
             <div className=" imageContainer">
               <img
-                src={`https://bistrobackend.onrender.com/uploads/${product.file}`}
+                src={`https://localhost:4457/uploads/${product.file}`}
+                // src={`https://bistrobackend.onrender.com/uploads/${product.file}`}
                 className="card-img-top"
                 alt="..."
               />

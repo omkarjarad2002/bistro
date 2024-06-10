@@ -40,10 +40,7 @@ function Restaurantdashboard() {
   const uploadImage = async () => {
     const formdata = new FormData();
     formdata.append("file", file);
-    const res = await axios.post(
-      "https://bistrobackend.onrender.com/uploadfile",
-      formdata
-    );
+    const res = await axios.post("http://localhost:4457/uploadfile", formdata);
     return res;
   };
 
@@ -53,24 +50,21 @@ function Restaurantdashboard() {
 
     const { name, price, quentity, type } = product;
 
-    const res = await fetch(
-      "https://bistrobackend.onrender.com/addnewproduct",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
+    const res = await fetch("http://localhost:4457/addnewproduct", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
 
-        body: JSON.stringify({
-          name,
-          price,
-          quentity,
-          type,
-          file: file.data.file.filename,
-          restaurantID: userData?._id,
-        }),
-      }
-    );
+      body: JSON.stringify({
+        name,
+        price,
+        quentity,
+        type,
+        file: file.data.file.filename,
+        restaurantID: userData?._id,
+      }),
+    });
 
     const data = await res.json();
 
